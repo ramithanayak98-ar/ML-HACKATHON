@@ -11,8 +11,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle, Image, KeepTogether)
 
 # ------------------------------------------------------------------ fill these in
-TEAM_NAME = "Team 7"
-MEMBERS = ["Ramitha Nayak MV - PES1UG24AM392", "Roopesh - PES1UG24AM393", "Rushikesh - PES1UG24AM394", "Sakshi P Shetty - PES1UG24AM395"]
+TEAM_NAME = "Team ____"
+MEMBERS = ["Name 1 (SRN)", "Name 2 (SRN)", "Name 3 (SRN)", "Name 4 (SRN)"]
 REPO_URL = "https://github.com/ramithanayak98-ar/ML-HACKATHON"
 BETA = 50
 OUT = "report/PathSnap_Technical_Report.pdf"
@@ -330,7 +330,9 @@ P("8. Academic Integrity and AI-Use Disclosure", H1)
 bullets(["Evaluator-testing trips were not used for training, feature selection, model selection, hyperparameter search or choosing beta.",
          "No predictions are hard-coded; the API computes every route at request time.",
          "All reported numbers come from result files in the repository and can be regenerated with scripts 01-08.",
-         "<b>AI assistance:</b> the source code (data processing, feature engineering, model training, Bayesian optimisation, HMM/Viterbi decoder, API and UI) and a first draft of this report were produced with an AI assistant (Claude, Anthropic). The team ran every experiment on its own machine, chose the decoder setting (beta = 50) from the measured results, and all numbers, tables and graphs come from those runs. The report text was reviewed and edited by the team."])
+         "<b>AI assistance:</b> parts of the starter code, the user interface and a first draft of this report's text were produced with an AI assistant "
+         "(Claude, Anthropic). All experiments were run by the team, all numbers come from our own runs, and the text was reviewed and edited by the team. "
+         "[EDIT THIS STATEMENT TO DESCRIBE YOUR ACTUAL USE.]"])
 
 doc = SimpleDocTemplate(OUT, pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm, topMargin=16 * mm, bottomMargin=16 * mm, title="PathSnap Technical Report")
 def foot(c, d):
