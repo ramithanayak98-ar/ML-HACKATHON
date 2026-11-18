@@ -106,8 +106,7 @@ P("<font size=12>Technical Report - UE24CS352A Machine Learning Hackathon</font>
 story.append(Spacer(1, 10))
 P(f"<b>{TEAM_NAME}</b><br/>" + "<br/>".join(MEMBERS))
 P(f"Repository: {REPO_URL}")
-P("Every number, table and graph in this report is produced by <font face='Courier'>scripts/08_make_report.py</font> "
-  "from the result files in the repository (<font face='Courier'>results/</font>, <font face='Courier'>maps/</font>), so the report can be rebuilt from them.", CAP)
+
 
 final_cls = hmm_model.get("final_model")
 P("Summary", H2)
