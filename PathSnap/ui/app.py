@@ -20,7 +20,7 @@ if st.button("Run map-matching"):
     c[1].metric("Route continuity", pct("route_continuity"))
     c[2].metric("Arc recall", pct("route_arc_recall"))
     c[3].metric("Inference time", f"{m['inference_time_s']} s")
-    gps = out["gps"]; fmap = folium.Map(location=gps[len(gps)//2], zoom_start=15)
+    gps = out["gps"]; fmap = folium.Map(location=gps[len(gps)//2], zoom_start=15, tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', attr='Esri')
     g1 = folium.FeatureGroup("Raw GPS"); g2 = folium.FeatureGroup("Predicted route")
     for p in gps: folium.CircleMarker(p, radius=2, color="blue").add_to(g1)
     for line in out["predicted_route"]: folium.PolyLine(line, color="red", weight=4).add_to(g2)

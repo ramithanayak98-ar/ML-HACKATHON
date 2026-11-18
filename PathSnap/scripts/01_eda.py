@@ -29,7 +29,7 @@ plt.tight_layout(); plt.savefig("results/eda/histograms.png", dpi=150)
 # Folium map of one training trip: GPS (blue), road network (grey), reference route (green)
 tid = sorted(os.listdir("data/train"))[0]
 tr, no, ar, ro = load_trip("data/train", tid)
-m = folium.Map(location=[tr.lat.mean(), tr.lon.mean()], zoom_start=15)
+m = folium.Map(location=[tr.lat.mean(), tr.lon.mean()], zoom_start=15, tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', attr='Esri')
 net = folium.FeatureGroup("Road network (sample)")
 for u, v in ar.sample(min(3000, len(ar)), random_state=0).values:
     folium.PolyLine([(no.lat[u], no.lon[u]), (no.lat[v], no.lon[v])], color="gray", weight=1).add_to(net)

@@ -12,7 +12,7 @@ track, nodes, arcs, labels, feats = prepare_trip("data/student_test", tid)
 pred = viterbi(track, feats, model.predict_proba(feats[FEATURES])[:, 1], RoadGraph(nodes, arcs), beta=BETA)
 route = load_trip("data/student_test", tid)[3]
 def arc_line(a): u, v = arcs.u[a], arcs.v[a]; return [(nodes.lat[u], nodes.lon[u]), (nodes.lat[v], nodes.lon[v])]
-m = folium.Map(location=[track.lat.mean(), track.lon.mean()], zoom_start=15)
+m = folium.Map(location=[track.lat.mean(), track.lon.mean()], zoom_start=15, tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', attr='Esri')
 layers = {"Road network (near route)": "lightgray", "Reference route": "green", "Predicted route (HMM)": "red"}
 fg = {k: folium.FeatureGroup(k) for k in layers}
 near = set(feats.arc_id.unique())
