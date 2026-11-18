@@ -2,6 +2,7 @@
 Talks ONLY to the FastAPI backend on Laptop 1. It never sees ground-truth routes."""
 import os, time, requests, folium, pandas as pd, streamlit as st
 import streamlit.components.v1 as components
+import json
 
 APP_NAME = "SnapRoute"                      # change the website name here
 ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/{}/MapServer/tile/{{z}}/{{y}}/{{x}}"
@@ -173,6 +174,39 @@ with tab_run:
                ("Inference time", f"{m.get('inference_time_s', 0)} s", f"{m.get('n_gps_points', 0)} GPS points", "#6366f1")])
         st.caption("Card colour: 🟢 ≥ 90 %  ·  🟠 75–90 %  ·  🔴 < 75 %")
         st.write("")
+        st.subheader("📥 Download prediction reports")
+
+        download_cols = st.columns(3)
+
+        with download_cols[0]:
+            st.download_button(
+                "⬇️ Full prediction JSON",
+                data=json.dumps(out, indent=2, default=str),
+                file_name=f"pathsnap_{out['trip_id']}_report.json",
+                mime="application/json",
+                use_container_width=True
+            )
+
+        with download_cols[1]:
+            metrics_df = pd.DataFrame([m])
+            st.download_button(
+                "⬇️ Metrics CSV",
+                data=metrics_df.to_csv(index=False),
+                file_name=f"pathsnap_{out['trip_id']}_metrics.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+
+        with download_cols[2]:
+            history_df = pd.DataFrame(st.session_state.history)
+            st.download_button(
+                "⬇️ Session history CSV",
+                data=history_df.to_csv(index=False),
+                file_name="pathsnap_session_history.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+
         t_map, t_hist, t_raw = st.tabs(["Map", "Runs this session", "Raw API response"])
         with t_map:
             cc1, cc2 = st.columns([1, 2], vertical_alignment="center")
