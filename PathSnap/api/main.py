@@ -10,7 +10,7 @@ from src.features import FEATURES
 from src.core import load_trip
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s"); log = logging.getLogger("pathsnap")
 EVAL_DIR = os.environ.get("EVAL_DIR", "data/eval_test")      # the 10 evaluator trips live ONLY on this laptop
-BETA = float(os.environ.get("BETA", "10"))
+BETA = float(os.environ.get("BETA", "50"))
 model = joblib.load("models/final_model.joblib")
 app = FastAPI(title="PathSnap API")
 

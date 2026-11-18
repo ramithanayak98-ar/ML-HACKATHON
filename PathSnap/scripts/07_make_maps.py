@@ -6,7 +6,7 @@ from src.hmm import RoadGraph, viterbi
 from src.features import FEATURES
 from src.core import load_trip
 tid = sys.argv[1] if len(sys.argv) > 1 else sorted(os.listdir("data/student_test"))[0]
-BETA = float(os.environ.get("BETA", "10"))
+BETA = float(os.environ.get("BETA", "50"))
 model = joblib.load("models/final_model.joblib")
 track, nodes, arcs, labels, feats = prepare_trip("data/student_test", tid)
 pred = viterbi(track, feats, model.predict_proba(feats[FEATURES])[:, 1], RoadGraph(nodes, arcs), beta=BETA)
