@@ -47,3 +47,44 @@ Ground-truth routes stay on Laptop 1; the API returns only the predicted route a
 
 ## AI-assistance disclosure
 Parts of the starter code were generated with an AI assistant (Claude) and then run, checked and modified by the team. All reported numbers come from our own runs of this repository.
+
+## Install and Run on macOS
+
+Navigate to the project folder:
+
+    cd ~/Desktop/ML-HACKATHON/PathSnap
+
+Create and activate the environment:
+
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
+### Start FastAPI Backend
+
+    python3 -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+API documentation: http://localhost:8000/docs
+
+### Start Streamlit Frontend
+
+Open a second Terminal window:
+
+    cd ~/Desktop/ML-HACKATHON/PathSnap
+    source venv/bin/activate
+    streamlit run ui/app.py
+
+### Model Evaluation Results
+
+| Trip ID | GPS Points | Top-1 Accuracy | Arc Precision | Arc Recall | Continuity |
+|---|---:|---:|---:|---:|---:|
+| 00000015 | 6854 | 57.43% | 40.56% | 96.32% | 92.63% |
+| 00000067 | 916 | 88.65% | 79.17% | 92.68% | 92.55% |
+| 00000094 | 3230 | 85.48% | 81.14% | 91.89% | 84.86% |
+
+All three trips successfully returned predictions through the FastAPI endpoint.
+
+Trip 00000015 requires further improvement in route precision.
+
+Detailed results: docs/evaluation_results.md
+
